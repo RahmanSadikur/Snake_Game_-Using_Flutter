@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static List<int> snakePosition = [145, 65, 85, 105, 125];
+  static List<int> snakePosition = [45, 65];
   int numberofsquares = 760;
   static var randomNumber = Random();
   int food = randomNumber.nextInt(700);
@@ -33,8 +33,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   void startGame() {
-    gameover = false;
-    snakePosition = [45, 65, 85, 105, 125];
+    setState(() {
+      _gameover = false;
+    });
+    snakePosition = [45, 65];
     const duration = const Duration(milliseconds: 300);
     Timer.periodic(duration, (Timer timer) {
       updatesnake();
@@ -90,13 +92,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  set gameover(v) {
-    setState(() {
-      _gameover = v;
-    });
-  }
-
-  // static int count = 0;
   bool get gameover {
     for (int i = 0; i < snakePosition.length; i++) {
       int count = 0;
@@ -123,7 +118,7 @@ class _HomePageState extends State<HomePage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text("Game Over"),
-            content: Text("You\'re score : ${snakePosition.length}"),
+            content: Text("You\'re score : ${snakePosition.length - 2}"),
             actions: [
               TextButton(
                 onPressed: () {
@@ -223,6 +218,22 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Text(
                   "© S e m i c o l o n",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "S c o r e :",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                Text(
+                  "${snakePosition.length - 2}",
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ],
