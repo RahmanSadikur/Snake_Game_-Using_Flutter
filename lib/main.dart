@@ -91,7 +91,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   set gameover(v) {
-    _gameover = v;
+    setState(() {
+      _gameover = v;
+    });
   }
 
   // static int count = 0;
@@ -103,7 +105,10 @@ class _HomePageState extends State<HomePage> {
           count += 1;
         }
         if (count == 2) {
-          _gameover = true;
+          setState(() {
+            _gameover = true;
+          });
+
           return _gameover;
         }
       }
